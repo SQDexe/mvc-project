@@ -12,7 +12,7 @@ Projekt zaliczeniowy na uniwersytet
 ## Funkcjonalności
 - routing i obsługa zapytań - wykorzystując 'express'
 - SSR - wykorzytsująć 'ejs'
-- przesyłanie, zapisywanie i przechowywanie plików - wykorzytsując 'multar'
+- przesyłanie, zapisywanie i przechowywanie plików - wykorzytsując 'multar' oraz pliki JSON
 - pogląd kolecji na stronie głównej
 - pogląd szczegółowy pojedynczych filmów na podstronach
 - możliwość edytowania filmów na podstronach
@@ -28,4 +28,11 @@ Projekt wykorzystuje zależności:
 - fs
 - multer
 - path
-Wszystkie wymagają instalacji za pomocą komendy 
+
+Inicjalizacja nastąpiła za pomocą komendy `npm init`
+Wszystkie pakiety wymagają instalacji za pomocą komendy `npm install [package] --save`
+Projekt uruchamiany jest za pomocą komendy `node app.js`
+Powyższe komendy trzeba wykonywać z poziomu katalogu root'a projektu
+
+Folder 'data' przechowuje dane przykładowe
+Folder 'public/uploads' przechowuje zdjęcia do danych przykładowych
