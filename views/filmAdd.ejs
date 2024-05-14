@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/header.ejs') %>
+        <form action="/film/add" method="post" enctype="multipart/form-data">
+            <div class="main flex flex-column">        
+                <table class="table table-input">
+                    <tr>
+                        <td>
+                            <label for="title">Title</label>
+                        </td>
+                        <td>
+                            <input type="text" name="title" minlength="1" maxlength="128" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="poster">Poster</label>
+                        </td>
+                        <td>
+                            <input type="file" name="poster" accept="image/png,image/jpeg" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="description">Description</label>
+                        </td>
+                        <td>
+                            <textarea name="description" minlength="1" maxlength="1024" required></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="releaseDate">Release Date</label>
+                        </td>
+                        <td>
+                            <input type="date" name="releaseDate" min="<%= deafultValues.minDate %>" max="<%= deafultValues.maxDate %>" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="director">Director</label>
+                        </td>
+                        <td>
+                            <input type="text" name="director" minlength="1" maxlength="128" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="runtime">Runtime</label>
+                        </td>
+                        <td>
+                            <input type="number" name="runtime" min="1" step="1" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="genre">Genre</label>
+                        </td>
+                        <td>
+                            <select name="genre" required>
+                                <% for (let genre of deafultValues.genres) { %>
+                                    <option value="<%= genre %>"><%= genre.at(0).toUpperCase() + genre.slice(1) %></option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <input class="submit" type="submit" value="Add">
+            </div>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/header.ejs') %>
+        <div class="main flex flex-gallery">
+            <% for (let [id, film] of films) { %>
+                <div class="film">
+                    <div class="title">
+                        <div class="<%= film.watched ? 'watched' : 'unwatched' %>">&#128065;</div> <%= film.title %>
+                    </div>
+                    <img class="poster" src="/uploads/<%= film.poster %>" alt="<Poster of <%= film.title %>>" onerror="this.onerror=null;this.src='/not_found.png';">
+                    <a class="view" href="/film/view/<%= id %>">...</a>
+                    <div class="rating">
+                        <div class="star">&starf;</div> <%= film.rating %>
+                    </div>
+                </div>
+            <% } %>
+            <a class="add flex" href="/film/add">+</a>
+        </div>
+    </body>
+</html>

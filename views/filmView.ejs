@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/header.ejs') %>
+    </div>
+    <div class="main flex flex-column">        
+        <table class="table table-view">
+            <tr>
+                <td>Title</td>
+                <td><%= film.title %></td>
+            </tr>
+            <tr>
+                <td>Poster</td>
+                <td>
+                    <img src="/uploads/<%= film.poster %>" alt="<Poster of <%= film.title %>>" onerror="this.onerror=null;this.src='/not_found.png';">
+                </td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><%= film.description %></td>
+            </tr>
+            <tr>
+                <td>Release Date</td>
+                <td><%= film.getFormatedReleaseDate() %></td>
+            </tr>
+            <tr>
+                <td>Director</td>
+                <td><%= film.director %></td>
+            </tr>
+            <tr>
+                <td>Runtime</td>
+                <td><%= film.runtime %> min.</td>
+            </tr>
+            <tr>
+                <td>Genre</td>
+                <td><%= film.getFormatedGenre() %></td>
+            </tr>
+            <tr>
+                <td>Watched</td>
+                <td><%= film.watched %></td>
+            </tr>
+            <tr>
+                <td>Rating</td>
+                <td><div class="star">&starf;</div> <%= film.rating %></td>
+            </tr>
+            <tr>
+                <td>Review</td>
+                <td><%= film.review %></td>
+            </tr>
+        </table>
+        <a class="edit" href="/film/edit/<%= id %>">Edit</a>
+        <a class="delete" href="/film/delete/<%= id %>">Delete</a>
+    </div>
+    </body>
+</html>
