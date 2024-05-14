@@ -40,45 +40,61 @@ const saveFilmAdd = (req, res) => {
 
 const renderFilmEdit = (req, res) => {
     const id = req.params.id;
-    const film = Film.getFilm(id);
-    res.render('filmEdit', {
-        pageTitle: `Edit - "${film.title}"`,
-        id,
-        deafultValues: DEFAULT
-        });
+    if (Film.checkId(id)) {
+        const film = Film.getFilm(id);
+        res.render('filmEdit', {
+            pageTitle: `Edit - "${film.title}"`,
+            id,
+            deafultValues: DEFAULT
+            });
+        }
+    else
+        res.redirect('/not-found');
     };
 
 const saveFilmEdit = (req, res) => {
     let dir = '/';
-    try {
-        const id = req.params.id;
-        const { title, description, releaseDate, director, runtime, genre, watched, rating, review } = req.body;
-        let poster;
-        try { poster = req.file.filename; }
-        catch (err) { poster = ''; }
-        Film.change(id, {title, poster, description, releaseDate, director, runtime, genre, watched, rating, review});
-        dir = `/film/view/${id}`;
+    const id = req.params.id;
+    if (Film.checkId(id)) {
+        try {
+            const { title, description, releaseDate, director, runtime, genre, watched, rating, review } = req.body;
+            let poster;
+            try { poster = req.file.filename; }
+            catch (err) { poster = ''; }
+            Film.change(id, {title, poster, description, releaseDate, director, runtime, genre, watched, rating, review});
+            dir = `/film/view/${id}`;
+            }
+        catch (err) {
+            console.error(err);
+            }
+        res.redirect(dir);
         }
-    catch (err) {
-        console.error(err);
-        }
-    res.redirect(dir);
+    else
+        res.redirect('/not-found');
     };
 
 const deleteFilm = (req, res) => {
     const id = req.params.id;
-    Film.delete(id);
-    res.redirect('/');
+    if (Film.checkId(id)) {
+        Film.delete(id);
+        res.redirect('/');
+        }
+    else
+        res.redirect('/not-found');
     };
 
 const renderFilmView = (req, res) => {
     const id = req.params.id;
-    const film = Film.getFilm(id);
-    res.render('filmView', {
-        pageTitle: `Data - "${film.title}"`,
-        id,
-        film
-        });
+    if (Film.checkId(id)) {
+        const film = Film.getFilm(id);
+        res.render('filmView', {
+            pageTitle: `Data - "${film.title}"`,
+            id,
+            film
+            });
+        }
+    else
+        res.redirect('/not-found');
     };
 
 module.exports = {

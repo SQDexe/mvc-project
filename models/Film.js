@@ -60,25 +60,34 @@ class Film {
         return this.genre.at(0).toUpperCase() + this.genre.slice(1);
         }
 
+    static checkId(id) {
+        return films.findIndex(([filmID, ]) => id === filmID) !== -1;
+        }
     static delete(id) {
-        films.splice(films.findIndex(([filmID, ]) => id === filmID), 1);
-        writeFilmsFile();
-        readFilmsFile();
+        if (Film.checkId(id)) {
+            films.splice(films.findIndex(([filmID, ]) => id === filmID), 1);
+            writeFilmsFile();
+            readFilmsFile();
+            }
         }
     static change(id, opt) {
-        const film = Film.getFilm(id);
-        for (let [key, val] of Object.entries(opt))
-            if (val !== '')
-                film[key] = key === 'runtime' || key === 'rating' ?
-                    Number.parseInt(val) :
-                    key === 'watched' ?
-                        val === 'on' :
-                        val;
-        writeFilmsFile();
-        readFilmsFile();
+        if (Film.checkId(id)) {
+            const film = Film.getFilm(id);
+            for (let [key, val] of Object.entries(opt))
+                if (val !== '')
+                    film[key] = key === 'runtime' || key === 'rating' ?
+                        Number.parseInt(val) :
+                        key === 'watched' ?
+                            val === 'on' :
+                            val;
+            writeFilmsFile();
+            readFilmsFile();
+            }
         }
     static getFilm(id) {
-        return films[films.findIndex(([filmID, ]) => id === filmID)][1];
+        return Film.checkId(id) ?
+            films[films.findIndex(([filmID, ]) => id === filmID)][1] :
+            null;
         }
     static getAllFilms() {
         return films;
