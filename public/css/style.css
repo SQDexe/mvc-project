@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 :root {
     --font-garmadon: Garamond, serif;
     --font-courier: 'Courier New', Courier, monospace;
@@ -22,18 +29,32 @@ textarea {
 
 /* Partial elements */
 .flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+    -webkit-box-align: center;
+       -ms-flex-align: center;
+          align-items: center;
+    -webkit-box-pack: center;
+     justify-content: center;
+       -ms-flex-pack: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
     gap: 5rem;
     }
 .flex-gallery {
-    align-items: start;
-    justify-content: start;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+           align-items: start;
+    -webkit-box-pack: start;
+     justify-content: start;
+       -ms-flex-pack: start;
     }
 .flex-column {
-    flex-direction: column;
+    -webkit-box-direction: normal;
+       -webkit-box-orient: vertical;
+       -ms-flex-direction: column;
+           flex-direction: column;
     }
 .table {
     max-width: 75%;
@@ -57,7 +78,10 @@ textarea {
     }
 .navbar-title, .navbar-item {
     display: inline-block;
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
     color: #ffff88;
     font-family: var(--font-garmadon);
     font-weight: bolder;
@@ -92,32 +116,60 @@ textarea {
     font-family: var(--font-courier);
     }
 .film {
+    display: -ms-grid;
     display: grid;
-    grid-template:
+    -ms-grid-rows: auto auto;
+        grid-template:
         'title title'
         'image image'
         'view rating';
-    justify-content: center;
-    align-content: space-evenly;
+    -webkit-box-pack: center;
+     justify-content: center;
+       -ms-flex-pack: center;
+    -ms-flex-line-pack: space-evenly;
+         align-content: space-evenly;
     justify-items: center;
     text-align: center;
     color: #ffffff;
     .title {
+        -ms-grid-row: 1;
+            grid-row: 1;
+        -ms-grid-column: 1;
+            grid-column: 1;
+        -ms-grid-column-span: 2;
         grid-area: title;
         width: 15rem;
         overflow: hidden;
         white-space: nowrap;
-        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+           text-overflow: ellipsis;
         font-size: 2rem;
         }
     .poster {
+        -ms-grid-row: 1;
+            grid-row: 1;
+        -ms-grid-column: 1;
+            grid-column: 1;
+        -ms-grid-column-span: 2;
         width: 16rem;
         height: 22rem;
         grid-area: image;
         border-radius: 1rem;
         }
-    .rating { grid-area: rating; }
-    .view { grid-area: view; }
+    .rating {
+        -ms-grid-row: 3;
+            grid-row: 3;
+        -ms-grid-column: 2;
+            grid-column: 2;
+        grid-area: rating;
+        }
+    .view {
+        -ms-grid-row: 3;
+            grid-row: 3;
+        -ms-grid-column: 1;
+            grid-column: 1;
+        grid-area: view;
+        }
     .rating, .view {
         width: 6rem;
         border-radius: 1rem;
@@ -127,7 +179,10 @@ textarea {
         }
     }
 .add {
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
     color: #777777;
     font-size: 20rem;
     &:is(:hover, :active) {
@@ -188,19 +243,36 @@ textarea {
     }
 
 .unfound {
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
     color: #ffffff;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: var(--font-courier);
     font-size: 5rem;
-    animation: gliching 10s ease 0s infinite forwards;
+    -webkit-animation: gliching 10s ease 0s infinite forwards;
+            animation: gliching 10s ease 0s infinite forwards;
     }
 .watched, .unwatched, .star {
     display: inline;
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
     }
 .watched { color: #ffffff; }
 .unwatched { color: #444444; }
 .star { color: #ffdd00; }
+
+@-webkit-keyframes gliching {
+    from, to,
+    15%, 35%,
+    65%, 95% { text-shadow: none; }
+    20%, 25%, 30% { text-shadow: red -.3rem -.1rem .1rem, cyan .3rem .1rem .1rem; }
+    23%, 27% { text-shadow: red -.2rem -.1rem .1rem, cyan .2rem .1rem .1rem; }
+    70%, 80%, 90% { text-shadow: red -.3rem .2rem .1rem, blue 0 -.2rem .1rem, green .3rem .2rem .1rem; }
+    75%, 85% { text-shadow: red -.2rem .2rem .1rem, blue 0 -.3rem .1rem, green .2rem .2rem .1rem; }
+    }
 
 @keyframes gliching {
     from, to,
